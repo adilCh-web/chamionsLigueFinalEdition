@@ -28,9 +28,6 @@ var scooringFinal = []
 let playedGame=[[],[],[],[],[],[],[],[]]
 
 let groupNr = 1
-var timeouts=[] //to store all the timeoiut we are creating from a for loops so we can clear them 
-
-
 
 
 
@@ -54,6 +51,7 @@ function printDatainTable()
         table.id = "tableGroup"+groupNr
         for(let i=1;i<7;i++)
         {
+            
             let row = document.createElement("tr")
             let cellData1 = document.createElement("td")
             cellData1.id = "team"+ i+ "group"+groupNr
@@ -65,6 +63,14 @@ function printDatainTable()
             btn.innerHTML="Result";
             lbl.innerHTML = "0 Mins"
             btn.id="r"+ i+"group"+groupNr
+            if(i===1)
+            {
+                btn.disabled=false
+            }
+            else
+            {
+                btn.disabled=true
+            }
             btn.className = "buttonsClass"
             lbl.className="span"
             lbl.id = "timer"+i+"group"+groupNr
@@ -86,8 +92,24 @@ function printDatainTable()
         
             btn.addEventListener("click",
             function(){
-                resultThroughTime(scrores[groupNr-1][i-1][0],scrores[groupNr-1][i-1][1],btn,lbl.id);
                 playedGame[groupNr-1].push("played")
+                console.log(playedGame)
+                resultThroughTime(scrores[groupNr-1][i-1][0],scrores[groupNr-1][i-1][1],btn,lbl.id);
+                if(i<6)
+                {
+                    document.getElementById("r"+ Number(i+1)+"group"+groupNr).disabled=false
+                }
+                if(i==5)
+                {
+                    document.getElementById("previous").disabled=true;
+                    document.getElementById("next").disabled=true;
+                    setTimeout(() => {
+                        document.getElementById("previous").disabled=false;
+                        document.getElementById("next").disabled=false;
+                    }, 45000);
+
+                }
+                
                 setTimeout(() => {
                     getGoalsAndQualification()
                 }, 45000);
@@ -160,15 +182,15 @@ function resultThroughTime(nr1,nr2,buttonClicked,id,penalties)
      
     for(let g=0;g<nr1;g++)
         {
-            timeouts.push(setTimeout(()=>{goal1+=1;
-            buttonClicked.innerHTML = goal1 + "-" + goal2 ;console.log(goal1)},Math.floor(Math.random()*45000)))
+            setTimeout(()=>{goal1+=1;
+            buttonClicked.innerHTML = goal1 + "-" + goal2 ;console.log(goal1)},Math.floor(Math.random()*45000))
             
         }
 
     for(let g=0;g<nr2;g++)
         {
-            timeouts.push(setTimeout(()=>{goal2+=1
-                buttonClicked.innerHTML = goal1 + "-" + goal2},Math.floor(Math.random()*45000)))
+            setTimeout(()=>{goal2+=1
+                buttonClicked.innerHTML = goal1 + "-" + goal2},Math.floor(Math.random()*45000))
         }
     var timer=0
     var thisInterval = 
@@ -207,10 +229,7 @@ function nextGroupShowing()
     displayGroups()
     document.getElementById("groupLabel").innerHTML = "Group " + groupNr
 
-    for(let i=0;i<timeouts.length;i++)
-    {
-        clearTimeout(timeouts[i])
-    }
+
     // console.log("important=   "+ timeouts.length)
     // console.log( timeouts)
 }
@@ -228,10 +247,6 @@ function previousGroupShowing()
     printDatainTable()
     displayGroups()
     document.getElementById("groupLabel").innerHTML = "Group " + groupNr
-    for(let i=0;i<timeouts.length;i++)
-    {
-        clearTimeout(timeouts[i])
-    }
 
 
 }
@@ -889,7 +904,7 @@ function final()
     
     
             }
-            console.log(qualifiedTeam)
+            //console.log(qualifiedTeam)
             return qualifiedTeam
             
         }
@@ -897,14 +912,15 @@ function final()
     }
 
 const ctx = document.getElementById("chart").getContext('2d');
-let labels = []
-let data = []
+let labels_ = []
+let data_ = []
 db.collection("winners").get().then(winners=>
     {
         for(let i=0;i<winners.length;i++)
             {
-                labels.push(winners[i].team)
-                data.push(winners[i].point)
+                labels_.push(winners[i].team)
+                //console.log(winners[i].team)
+                data_.push(winners[i].point)
 
             }
     })
@@ -913,11 +929,11 @@ db.collection("winners").get().then(winners=>
 new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: labels,
+            labels: labels_,
             datasets: [
                 {
                     label: 'Number of Titles',
-                    data: data,
+                    data: data_,
                     borderWidth: 1,
                     fill: true,
                     backgroundColor: "orange",

@@ -2,7 +2,7 @@ const logos = ["fcb.png","psg.png","bym.png","jvn.png","acm.png","bvb.png","chl.
 
 let imgLogo = document.getElementById("imgLogo")
 setInterval(() => {
-        imgLogo.src = "https://github.com/adilCh-web/chamionsLigueFinalEdition/img/"+logos[Math.floor(Math.random()*logos.length)]
+        imgLogo.src = "img/"+logos[Math.floor(Math.random()*logos.length)]
  
     
 }, 2000);
