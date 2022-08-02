@@ -71,3 +71,5 @@ function drawAndResult(teams,numberOfTeams,btn)
 }
 
 export {drawAndResult}
+
+

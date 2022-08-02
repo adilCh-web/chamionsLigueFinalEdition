@@ -3,6 +3,7 @@ import {groups,totalTeams} from "./formingGroups.js"
 //import {drawAndResult} from "./drawAndResult.js"
 import {scrores} from "./scoresFirstPhase.js"
 
+
 let db = new Localbase("db")
 
 console.log(totalTeams.length)
@@ -21,7 +22,7 @@ var teams8 = []
 var scooring8 = []
 let teams4 = []
 var scooring4 = []
-let FinalTeams = []
+let finalTeams = []
 var scooringFinal = []
 
 let playedGame=[[],[],[],[],[],[],[],[]]
@@ -767,7 +768,7 @@ function semiFinal()
             scooring4.push(scooring(teams4[i],teams4[decrease]))
             decrease -=1
         }
-        FinalTeams = drawAndResult(teams4,4, scooring4, document.getElementById("button4"))
+        finalTeams = drawAndResult(teams4,4, scooring4, document.getElementById("button4"))
     }
 
 }
@@ -776,14 +777,14 @@ function final()
 
     {
 
-        if (FinalTeams.length == 2)
+        if (finalTeams.length == 2)
         {
-            let decrease = FinalTeams.length
-            for(let i=0;i<FinalTeams.length;i++)
+            let decrease = finalTeams.length
+            for(let i=0;i<finalTeams.length;i++)
             {
-                scooringFinal.push(scooring(teams8[i],teams8[decrease]))
+                scooringFinal.push(scooring(finalTeams[i],finalTeams[decrease]))
             }
-            winner = drawAndResult(FinalTeams,2, scooringFinal, document.getElementById("buttonF"))
+            winner = drawAndResult(finalTeams,2, scooringFinal, document.getElementById("buttonF"))
             //console.log(winner)
 
             
