@@ -92,7 +92,6 @@ function printDatainTable()
         
             btn.addEventListener("click",
             function(){
-                playedGame[groupNr-1].push("played")
                 console.log(playedGame)
                 resultThroughTime(scrores[groupNr-1][i-1][0],scrores[groupNr-1][i-1][1],btn,lbl.id);
                 if(i<6)
@@ -111,6 +110,7 @@ function printDatainTable()
                 }
                 
                 setTimeout(() => {
+                    playedGame[groupNr-1].push("played")
                     getGoalsAndQualification()
                 }, 45000);
                 
