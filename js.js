@@ -1,6 +1,5 @@
 import { scooring } from "./scooring.js"
 import {groups,totalTeams} from "./formingGroups.js"
-//import {drawAndResult} from "./drawAndResult.js"
 import {scrores} from "./scoresFirstPhase.js"
 
 
@@ -28,6 +27,11 @@ var scooringFinal = []
 let playedGame=[[],[],[],[],[],[],[],[]]
 
 let groupNr = 1
+
+let startGameAudio = new Audio("./audio/Soccer_Whistle_Sound_Effect.mp3")
+let goalAudio = new Audio("./audio/football-cheer-fan-applause-go.m4a")
+let championsLigueSong = new Audio("./audio/UEFA_Champions_League_Theme_Song.mp3")
+
 
 
 
@@ -93,6 +97,7 @@ function printDatainTable()
             btn.addEventListener("click",
             function(){
                 console.log(playedGame)
+                startGameAudio.play()
                 resultThroughTime(scrores[groupNr-1][i-1][0],scrores[groupNr-1][i-1][1],btn,lbl.id);
                 if(i<6)
                 {
@@ -182,15 +187,26 @@ function resultThroughTime(nr1,nr2,buttonClicked,id,penalties)
      
     for(let g=0;g<nr1;g++)
         {
-            setTimeout(()=>{goal1+=1;
-            buttonClicked.innerHTML = goal1 + "-" + goal2 ;console.log(goal1)},Math.floor(Math.random()*45000))
+            setTimeout(()=>
+            {
+                goal1+=1;
+                goalAudio.play();
+                buttonClicked.innerHTML = goal1 + "-" + goal2 ;
+                console.log(goal1)
+            },
+            Math.floor(Math.random()*45000))
             
         }
 
     for(let g=0;g<nr2;g++)
         {
-            setTimeout(()=>{goal2+=1
-                buttonClicked.innerHTML = goal1 + "-" + goal2},Math.floor(Math.random()*45000))
+            setTimeout(()=>
+            {
+                goal2+=1;
+                goalAudio.play()
+                buttonClicked.innerHTML = goal1 + "-" + goal2
+            },
+            Math.floor(Math.random()*45000))
         }
     var timer=0
     var thisInterval = 
@@ -736,6 +752,7 @@ function display16Teams()
 {
     if(teams16.length == 16)
     {
+        championsLigueSong.play()
         let decrease = teams16.length
         for(let i=0;i<teams16.length;i++)
         {
@@ -756,6 +773,7 @@ function display16Teams()
 
 function quarterFinal()
 {
+    championsLigueSong.play()
     console.log(teams8.length)
     if (teams8.length == 8)
     {
@@ -777,6 +795,7 @@ function semiFinal()
 
     if (teams4.length == 4)
     {
+        championsLigueSong.play()
         let decrease = teams4.length
         for(let i=0;i<teams4.length;i++)
         {
@@ -794,6 +813,7 @@ function final()
 
         if (finalTeams.length == 2)
         {
+            championsLigueSong.play()
             let decrease = finalTeams.length
             for(let i=0;i<finalTeams.length;i++)
             {
@@ -921,7 +941,6 @@ db.collection("winners").get().then(winners=>
                 labels_.push(winners[i].team)
                 //console.log(winners[i].team)
                 data_.push(winners[i].point)
-
             }
     })
     
@@ -942,3 +961,21 @@ new Chart(ctx, {
             ],
         },
     });
+
+
+document.getElementById("displayLigue").addEventListener("click",()=>
+{
+    document.getElementById("container1").style.display = "none"
+    document.getElementById("container2").style.display = "block"
+    championsLigueSong.play()
+})
+
+
+const logos = ["fcb.png","psg.png","bym.png","jvn.png","acm.png","bvb.png","chl.png","fcl.png","mnu.png","mnc.png","real.png","atm.png","zsp.png","vlr.png","inm.png","ars.png","tth.png","olm.png","oll.png","fcv.png","byl.png","ajx.png","psv.png","npl.png","dzg.png","bnf.png"]
+
+let imgLogo = document.getElementById("imgLogo")
+setInterval(() => {
+        imgLogo.src = "img/"+logos[Math.floor(Math.random()*logos.length)]
+ 
+    
+}, 2000);

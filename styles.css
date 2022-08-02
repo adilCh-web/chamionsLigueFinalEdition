@@ -10,7 +10,7 @@ body
     color:white
 }
 
-#container
+#container1, #container2
 {
     width:350px;
     min-height:100vh;
@@ -20,6 +20,12 @@ body
     padding-top:40px;
 
 }
+
+#container2
+{
+    display:none;
+}
+
 #info
 {
     margin-top:40px;
@@ -69,6 +75,7 @@ ul
     justify-content: space-around;
     flex-wrap: wrap;
     align-items: center;
+    height:2rem;
 }
 nav a
 {
@@ -268,7 +275,7 @@ canvas
     justify-content: center;
 }
 
-#divLogos a
+#divLogos button
 {
     margin:10px auto;
     background-color: orangered;

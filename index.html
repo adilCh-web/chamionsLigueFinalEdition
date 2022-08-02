@@ -7,11 +7,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href=
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
+    <script src="https://unpkg.com/localbase/dist/localbase.dev.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js'></script>
     
 </head>
 
 <body>
-    <div id="container">
+    <div id="container1">
+
+        <h1><span>Welcome</span><br> to the Virtual<br> Champions ligue</h1>
+
+        <div id="divLogos">
+            <button id="displayLigue">Start new Ligue</button>
+            <img id="imgLogo" src="img/fcb.png">
+        </div>
+
+
+    </div>
+    <div id = "container2">
         <nav>
             <ul>
                 <li><img href = "index.html" src = "./img/logo.png" alt = "logo" height ="30rem"></li>
@@ -24,17 +39,48 @@
     
             </ul>
         </nav>
-
-        <h1><span>Welcome</span><br> to the Virtual<br> Champions ligue</h1>
-
-        <div id="divLogos">
-            <a href="ligue.html" target="_parent">Start new Ligue</a>
-            <img id="imgLogo" src="img/fcb.png">
+        <section id="firstPhase">
+            <u><h3 id = "groupLabel">Group 1</h3></u>
+            <div>
+                <button id = "previous"><i class="fas fa-arrow-alt-circle-left"></i></button>
+                <button id = "next"><i class="fas fa-arrow-alt-circle-right"></i></button>
+            </div>
+            <div id = "groupsDiv">
+                
+                <p id = "info"></p>
+            </div>
+            <div id="ranks">
+    
+            </div>
+    
+            <div id="tables">
+    
+            </div>
+        
+    
+    
+    
+        </section>
+    
+        <div id = "round16">
+            <div id = "nextRoundsTeam1Div">
+    
+            </div>
+            <div id = "nextRoundsResultDiv" style = "text-align: center">
+                
+            </div>
+            <div id = "nextRoundsTeam2Div">
+                
+            </div>
         </div>
-
-
+    
+        <canvas id="chart">
+    
+        </canvas>
+    
+    
     </div>
-    <script src="./javaS.js"></script> 
+    <script src="./js.js"  type="module"></script>  
 </body>
 
 </html>
