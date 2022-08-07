@@ -59,7 +59,7 @@ li
 {
     list-style-type: none;
     font-weight: bold;
-    color:white
+    color:white;
 }
 nav{
     background-color: orangered;
@@ -76,6 +76,10 @@ ul
     flex-wrap: wrap;
     align-items: center;
     height:2rem;
+}
+.navButton
+{
+    height:1.8rem;
 }
 nav a
 {
@@ -292,4 +296,20 @@ canvas
     height:200px;
     margin-top:30px;
    
+}
+
+.penalties
+{
+    font-size: 6px;
+    color: white;
+    letter-spacing:normal;
+}
+
+.devoloper
+{
+    font-style: italic;
+    text-align: center;
+    margin-top:10px;
+    font-size: 8px;
+    letter-spacing: 5px;
 }

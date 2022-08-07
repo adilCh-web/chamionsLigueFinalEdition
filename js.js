@@ -26,6 +26,8 @@ var scooringFinal = []
 
 let playedGame=[[],[],[],[],[],[],[],[]]
 
+
+
 let groupNr = 1
 
 let startGameAudio = new Audio("./audio/Soccer_Whistle_Sound_Effect.mp3")
@@ -110,14 +112,14 @@ function printDatainTable()
                     setTimeout(() => {
                         document.getElementById("previous").disabled=false;
                         document.getElementById("next").disabled=false;
-                    }, 45000);
+                    }, 92000);
 
                 }
                 
                 setTimeout(() => {
                     playedGame[groupNr-1].push("played")
                     getGoalsAndQualification()
-                }, 45000);
+                }, 90000);
                 
     
             /*scrores[groupNr-1][i-1].toString().replace(",", " - ");*/ })
@@ -194,7 +196,7 @@ function resultThroughTime(nr1,nr2,buttonClicked,id,penalties)
                 buttonClicked.innerHTML = goal1 + "-" + goal2 ;
                 console.log(goal1)
             },
-            Math.floor(Math.random()*45000))
+            Math.floor(Math.random()*90000))
             
         }
 
@@ -206,7 +208,7 @@ function resultThroughTime(nr1,nr2,buttonClicked,id,penalties)
                 goalAudio.play()
                 buttonClicked.innerHTML = goal1 + "-" + goal2
             },
-            Math.floor(Math.random()*45000))
+            Math.floor(Math.random()*90000))
         }
     var timer=0
     var thisInterval = 
@@ -215,7 +217,9 @@ function resultThroughTime(nr1,nr2,buttonClicked,id,penalties)
         document.getElementById(id).innerHTML = timer + " mins"
         if(timer==90)
           {clearInterval(thisInterval);
-        }},500)
+        }},1000)
+
+       
  
 
 }
@@ -854,8 +858,8 @@ function final()
     
             document.getElementById("nextRoundsResultDiv").innerHTML += "<br>" + "<hr>" + "<hr>" + "<hr>"  +"<hr>" +"<br>"
             document.getElementById("nextRoundsTeam2Div").innerHTML += "<br>" + "<hr>" + "<hr>" + "<hr>"  +"<hr>" +"<br>"
-    
-    
+            
+            
             for(let i =0;i<numberOfTeams/2;i++)
             {   let lblTeam1 = document.createElement("label")
                 lblTeam1.className="row"
@@ -884,40 +888,54 @@ function final()
                 div.appendChild(button)
                 div.appendChild(lbl)
                 document.getElementById("nextRoundsResultDiv").appendChild(div)
+                let index = Math.floor(Math.random()*2)
                 button.addEventListener("click",()=> {button.setAttribute('disabled', 'disabled');
-                     resultThroughTime(scooringArray[i][0],scooringArray[i][1],button,id_)})
-                let result = scooringArray[i]
-                console.log(result)
-
-                
-    
-                if(result[0] > result[1])
-                {
-                    qualifiedTeam.push(teams[i])
-    
-                }
-                else if(result[0] < result[1])
-                {
-                    qualifiedTeam.push(teams[decrease])
-                }
-                else
-                {
-                    let index = Math.floor(Math.random()*2)
-                    qualifiedTeam.push([teams[i],teams[decrease]][index])
-                    let penalties = [[4,1],[3,0],[5,4],[4,2],[3,1],[6,5]][Math.floor(Math.random()*6)]
-    
-                    if(index===0)
+                     resultThroughTime(scooringArray[i][0],scooringArray[i][1],button,id_);
+                     if(scooringArray[i][0] == scooringArray[i][1])
+                     {
+                         //qualifiedTeam.push([teams[i],teams[decrease]][index])
+                         //console.log(qualifiedTeam)
+                         let penalties = [[4,1],[3,0],[5,4],[4,2],[3,1],[6,5]][Math.floor(Math.random()*6)]
+         
+                         if(index==0)
+                         {
+                             setTimeout(() => {
+                                 button.innerHTML = button.innerHTML + `<br><span class="penalties">(${penalties[0]}-${penalties[1]})</span>`
+                                 console.log("is Settimeout")
+                             }, 94000);
+ 
+                            
+                         }
+                         else
+                         {
+                             setTimeout(() => {
+                                 button.innerHTML = button.innerHTML + `<br><span class="penalties">(${penalties[1]}-${penalties[0]})</span>`
+                                 console.log("is Settimeout")
+                             }, 94000);
+ 
+                             
+                         }
+                     }
+                     
+                    })
+                    if(scooringArray[i][0] > scooringArray[i][1])
                     {
-    
-                        result = `(${penalties[0]}) `+ result + ` (${penalties[1]})`
-                       
+                        qualifiedTeam.push(teams[i])
+                        console.log(qualifiedTeam)
+        
+                    }
+                    else if(scooringArray[i][0] < scooringArray[i][1])
+                    {
+                        qualifiedTeam.push(teams[decrease])
+                        console.log(qualifiedTeam)
                     }
                     else
                     {
-                        result = `(${penalties[1]}) ` + result + ` (${penalties[0]})`
-                        
+                        qualifiedTeam.push([teams[i],teams[decrease]][index])
+                        console.log(qualifiedTeam)
                     }
-                }
+
+
 
     
                 decrease-=1
@@ -965,6 +983,7 @@ new Chart(ctx, {
 
 document.getElementById("displayLigue").addEventListener("click",()=>
 {
+    clearInterval(logosSwitching)
     document.getElementById("container1").style.display = "none"
     document.getElementById("container2").style.display = "block"
     championsLigueSong.play()
@@ -974,8 +993,10 @@ document.getElementById("displayLigue").addEventListener("click",()=>
 const logos = ["fcb.png","psg.png","bym.png","jvn.png","acm.png","bvb.png","chl.png","fcl.png","mnu.png","mnc.png","real.png","atm.png","zsp.png","vlr.png","inm.png","ars.png","tth.png","olm.png","oll.png","fcv.png","byl.png","ajx.png","psv.png","npl.png","dzg.png","bnf.png"]
 
 let imgLogo = document.getElementById("imgLogo")
-setInterval(() => {
+let logosSwitching = setInterval(() => {
         imgLogo.src = "img/"+logos[Math.floor(Math.random()*logos.length)]
- 
     
 }, 2000);
+
+
+document.getElementById("newLigue").addEventListener("click",()=>{location.reload()})
